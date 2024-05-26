@@ -10,18 +10,48 @@ yesBtn.addEventListener('click', () => {
     });
 });
 
-noBtn.addEventListener('mouseover', () => {
-    const containerRect = container.getBoundingClientRect();
-    const noBtnRect = noBtn.getBoundingClientRect();
+noBtn.addEventListener('click', () => {
+  alert('Nice Try')
+  window.close()
+})
 
-    const newX = Math.random() * (containerRect.width - noBtnRect.width);
-    const newY = Math.random() * (containerRect.height - noBtnRect.height);
+document.addEventListener('mousemove', (e) => {
+  const x = e.pageX
+  const y = e.pageY
+  const buttonBox = noBtn.getBoundingClientRect()
+  const horizontalDistanceFrom = distanceFromCenter(buttonBox.x, x, buttonBox.width)
+  const verticalDistanceFrom = distanceFromCenter(buttonBox.y, y, buttonBox.height)
+  const horizontalOffset = buttonBox.width / 2 + OFFSET
+  const verticalOffset = buttonBox.height / 2 + OFFSET
+  if (Math.abs(horizontalDistanceFrom) <= horizontalOffset && Math.abs(verticalDistanceFrom) <= verticalOffset) {
+    setButtonPosition(
+      buttonBox.x + horizontalOffset / horizontalDistanceFrom * 10,
+      buttonBox.y + verticalOffset / verticalDistanceFrom * 10
+    )
+  }
+})
 
-    noBtn.style.left = `${newX}px`;
-    noBtn.style.top = `${newY}px`;
-});
+function setButtonPosition(left, top) {
+  const windowBox = document.body.getBoundingClientRect()
+  const buttonBox = noBtn.getBoundingClientRect()
 
-noBtn.addEventListener('mouseout', () => {
-    noBtn.style.left = '';
-    noBtn.style.top = '';
-});
+  if(distanceFromCenter(left, windowBox.left, buttonBox.width) < 0) {
+    left = windowBox.right - buttonBox.width - OFFSET
+  }
+  if(distanceFromCenter(left, windowBox.right, buttonBox.width) > 0) {
+    left = windowBox.left + OFFSET
+  }
+  if(distanceFromCenter(top, windowBox.top, buttonBox.height) < 0) {
+    top = windowBox.bottom - buttonBox.height - OFFSET
+  }
+  if(distanceFromCenter(top, windowBox.bottom, buttonBox.height) > 0) {
+    top = windowBox.top + OFFSET
+  }
+
+  noBtn.style.left = `${left}px`
+  noBtn.style.top = `${top}px`
+}
+
+function distanceFromCenter(boxPosition, mousePosition, boxSize) {
+  return boxPosition - mousePosition + boxSize / 2
+}
