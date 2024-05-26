@@ -1,27 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
-  <script defer src="script.js"></script>
-  <style>
-    body {
-      margin: 0;
-      width: 100vw;
-      height: 100vh;
-      overflow: hidden;
-    }
+    <!-- HTML: Metadata and Title -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confetti Button</title>
+    <!-- CSS: Styling for the page -->
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
 
-    #evil-button {
-      position: absolute;
-      white-space: nowrap;
-      font-size: 2rem;
-    }
-  </style>
+        .container {
+            text-align: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 20px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        #noBtn {
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
-  <button id="evil-button">Can't Touch Me</button>
-</body>
-</html>
+    <!-- HTML: Structure of the page -->
+    <div class="container">
+        <button id="yesBtn">Yes</button>
+        <button id="noBtn">No</button>
+    </div>
